@@ -89,7 +89,7 @@ cd build
 Run CMake with your custom VID/PID and board type:
 
 ```bash
- cmake .. -DPICO_SDK_PATH=$HOME/pico/pico-sdk -DPICO_BOARD=pico2 -DUSB_VID=0x349E -DUSB_PID=0x0099
+ cmake .. -DPICO_SDK_PATH=$HOME/pico/pico-sdk -DPICO_BOARD=pico2 -DUSB_VID=0x349E -DUSB_PID=0x0099 
 ```
 
 ## Step 5: Compile the Firmware
