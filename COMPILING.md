@@ -54,7 +54,7 @@ git submodule update --init --recursive
 
 After this step, your working directory will be: `~/pico/pico-fido`
 
-## Step 2: Modify AAGUID
+## Step 2: Modify AAGUID and LED Blinking details in the SDK code
 
 The AAGUID is defined in `pico-keys-sdk/src/cbor.c`. Open the file and find the line:
 
@@ -75,6 +75,28 @@ const uint8_t aaguid[16] = { 0xab, 0x32, 0xf0, 0xc6, 0x22, 0x39, 0xaf, 0xbb, 0xc
 ```
 
 Save the file (Ctrl+O, Enter, Ctrl+X in nano) or use your preferred editor.
+
+
+### LED Blinking Defaults and Updated Values
+
+The default LED blinking values defined in the SDK  
+(see the original lines here: [pico-keys-sdk `led.h` L53–L62](https://github.com/polhenarejos/pico-keys-sdk/blob/main/src/led/led.h#L53-L62))  
+were not always useful or easily distinguishable in practice.
+
+To improve clarity, we updated the LED patterns as follows:
+
+```c
+enum  {
+    MODE_NOT_MOUNTED = (MAX_BTNESS << LED_BTNESS_SHIFT) | (LED_COLOR_RED    << LED_COLOR_SHIFT) | (1500 << LED_ON_SHIFT) | (1500 << LED_OFF_SHIFT),
+    MODE_MOUNTED     = (MAX_BTNESS << LED_BTNESS_SHIFT) | (LED_COLOR_GREEN  << LED_COLOR_SHIFT) | (3000 << LED_ON_SHIFT) | (3000 << LED_OFF_SHIFT),
+    MODE_SUSPENDED   = (MAX_BTNESS << LED_BTNESS_SHIFT) | (LED_COLOR_BLUE   << LED_COLOR_SHIFT) | (1000 << LED_ON_SHIFT) | (2000 << LED_OFF_SHIFT),
+    MODE_PROCESSING  = (MAX_BTNESS << LED_BTNESS_SHIFT) | (LED_COLOR_GREEN  << LED_COLOR_SHIFT) | (50   << LED_ON_SHIFT) | (50   << LED_OFF_SHIFT),
+    MODE_BUTTON      = (MAX_BTNESS << LED_BTNESS_SHIFT) | (LED_COLOR_YELLOW << LED_COLOR_SHIFT) | (100  << LED_ON_SHIFT) | (100  << LED_OFF_SHIFT),
+
+    MODE_ALWAYS_ON   = UINT32_MAX,
+    MODE_ALWAYS_OFF  = 0
+};
+
 
 ## Step 3: Create Build Directory
 
