@@ -54,7 +54,7 @@ git submodule update --init --recursive
 
 After this step, your working directory will be: `~/pico/pico-fido`
 
-## Step 2: Modify AAGUID and LED Blinking details in the SDK code
+## Step 2: Modify details like AAGUID and LED Blinking details in the SDK code
 
 The AAGUID is defined in `pico-keys-sdk/src/cbor.c`. Open the file and find the line:
 
@@ -98,6 +98,7 @@ enum  {
 };
 ```
 
+Optionally, modify USB descriptor values in pico-keys-sdk/src/usb/usb_descriptors.c
 
 
 
