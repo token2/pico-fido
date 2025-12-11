@@ -13,4 +13,4 @@ PIN complexity validation is enforced directly on the microcontroller during PIN
 
 ## For Complete Documentation
 
-See the [original Pico FIDO repository](https://github.com/polhenarejos/pico-fido) for full features, build instructions, and general documentation.
+See the [original Pico FIDO repository](https://github.com/polhenarejos/pico-fido) for full features and general documentation.
