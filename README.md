@@ -1,6 +1,6 @@
-# Pico FIDO - Token2 Hardware PIN Complexity Fork
+# Pico FIDO - Token2 PIN Complexity Fork
 
-This is a fork of [Pico FIDO](https://github.com/polhenarejos/pico-fido) with **hardware-enforced PIN complexity** designed and tested for Token2 open hardware devices.
+This is a fork of [Pico FIDO](https://github.com/polhenarejos/pico-fido) with **firmware-enforced PIN complexity** designed and tested for Token2 open hardware devices.
 
 PIN complexity validation is enforced directly on the microcontroller during PIN setup, preventing weak credentials from being set regardless of client software.
 
