@@ -2,6 +2,9 @@
 
 This is a fork of [Pico FIDO](https://github.com/polhenarejos/pico-fido) with **firmware-enforced PIN complexity** designed and tested for Token2 open hardware devices.
 
+<img width="450" height="450" alt="image" src="https://github.com/user-attachments/assets/bc8bd3b4-ba55-4fa1-a836-1ef62ac26a5c" />
+
+
 PIN complexity validation is enforced directly on the microcontroller during PIN setup, preventing weak credentials from being set regardless of client software.
 
 ## Changes from Original
