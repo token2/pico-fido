@@ -97,6 +97,11 @@ enum  {
     MODE_ALWAYS_OFF  = 0
 };
 ```
+By default the LED are not set as dimmable, and have to be set using the comissioner tool. To enable it in advance in the firmware, change 
+
+`#define PHY_OPT_DIMM    0x1` (instead of `#define PHY_OPT_DIMM    0x2`)
+
+in `pico-fido/pico-keys-sdk/src/fs/phy.h`
 
 Optionally, modify USB descriptor values in pico-keys-sdk/src/usb/usb_descriptors.c
 
