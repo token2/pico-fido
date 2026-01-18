@@ -14,6 +14,8 @@ PIN complexity validation is enforced directly on the microcontroller during PIN
 - **VID/PID** - Uses Token2's official USB identifiers instead of the generic dummy VID/PID
 - **AAGUID** - Modified to match a real authenticator identifier (self-attestation only, no external attestation at this time)
 
+This project is not only open-source software, but also fully open hardware. The repository includes all the resources needed to understand, reproduce, and modify the [hardware design](Hardware-PCB-BOM-SCH.zip). Specifically, it contains the schematics (SCH), printed circuit board (PCB) layouts, and a complete bill of materials (BOM) listing all components used. The PCB files are provided in standard Gerber format, which can be used directly for manufacturing.
+
 ## For Complete Documentation
 
 See the [original Pico FIDO repository](https://github.com/polhenarejos/pico-fido) for full features and general documentation.
