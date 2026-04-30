@@ -17,9 +17,6 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 
-VERSION_MAJOR="4" #Version of Pico CCID Core
-VERSION_MINOR="0"
-
 echo "----------------------------"
 echo "VID/PID patcher for Pico FIDO"
 echo "----------------------------"
@@ -81,13 +78,22 @@ if [[ ! -f "$UF2_FILE_IF" ]]; then
 fi
 
 if [ "$UF2_FILE_IF" != "$UF2_FILE_OF" ]; then
-    cp -R $UF2_FILE_IF $UF2_FILE_OF
+    cp "$UF2_FILE_IF" "$UF2_FILE_OF"
 fi
 
-LITTLE_VID="\x${VID:2:2}\x${VID:0:2}"
-LITTLE_PID="\x${PID:2:2}\x${PID:0:2}"
+VIDPID_HEX="${VID:2:2}${VID:0:2}${PID:2:2}${PID:0:2}"
 
-perl -pi -e "s/[\x00-\xff]{4}\x$VERSION_MINOR\x$VERSION_MAJOR\x01\x02\x03\x01\x00\x00/$LITTLE_VID$LITTLE_PID\x$VERSION_MINOR\x$VERSION_MAJOR\x01\x02\x03\x01\x00\x00/" $UF2_FILE_OF
+MATCH_COUNT=$(perl -0777 -ne 'print scalar(() = /\x12\x01[\x00-\xff]{6}[\x00-\xff]{4}[\x00-\xff]{2}\x01\x02\x03\x01/g)' "$UF2_FILE_OF")
+
+if [ "$MATCH_COUNT" -ne 1 ]; then
+    echo "ERROR: expected exactly one USB device descriptor, found ${MATCH_COUNT}"
+    exit 1
+fi
+
+VIDPID_HEX="$VIDPID_HEX" perl -0777 -i -pe '
+    BEGIN { $vidpid = pack("H*", $ENV{"VIDPID_HEX"}); }
+    s/(\x12\x01[\x00-\xff]{6})[\x00-\xff]{4}([\x00-\xff]{2}\x01\x02\x03\x01)/$1$vidpid$2/g;
+' "$UF2_FILE_OF"
 
 echo "Done!"
 echo ""
